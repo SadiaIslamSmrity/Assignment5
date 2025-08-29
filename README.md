@@ -8,3 +8,9 @@ querySelectorAll returns all the matching element as a NodeList.
 
 Ans (2):
 I create new element by using document.createElement()
+
+Ans(3):
+When an event happens on an element the process flow is called event bubbling.
+
+Ans(4):
+Event deligation is a JS technique which attach a single listener to the parent instead of attaching event listeners to multiple child elements.
