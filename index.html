@@ -122,3 +122,50 @@
     </div>
 </div>
 </div>
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+  let coins = 100;
+  let copyCount = parseInt(document.querySelector(".ccopy").textContent) || 0;
+
+  const coinDisplay = document.querySelector(".li2");
+  const copyCounter = document.querySelector(".ccopy");
+  const copyButtons = document.querySelectorAll(".copy");
+  copyButtons.forEach(button => {
+    button.addEventListener("click", function () {
+      const card = button.closest(".card");
+      const number = card.querySelector(".num").textContent;
+      navigator.clipboard.writeText(number).then(() => {
+        alert(`Number ${number} copied to clipboard!`);
+        copyCount++;
+        copyCounter.textContent = copyCount;
+      }).catch(err => {
+        console.error('Failed to copy:', err);
+      });
+    });
+  });
+  const callButtons = document.querySelectorAll(".call");
+  const historyContainer = document.querySelector(".history-entries");
+  callButtons.forEach(button => {
+    button.addEventListener("click", function () {
+      if (coins > 0) {
+        coins -= 20;
+        if (coins < 0) coins = 0;
+        coinDisplay.innerHTML = coins + ' <img src="assets/coin.png" alt="">';
+      }
+      const card = button.closest(".card");
+      const name = card.querySelector(".B").textContent;
+      const number = card.querySelector(".num").textContent;
+      const time = new Date().toLocaleTimeString();
+      const entry = document.createElement("p");
+      entry.textContent = `${name} - ${number} - ${time}`;
+      historyContainer.appendChild(entry);
+    });
+  });
+  const clearBtn = document.querySelector(".clear");
+  clearBtn.addEventListener("click", function () {
+    historyContainer.innerHTML = "";
+  });
+});
+  </script>
+</body>
+</html>
